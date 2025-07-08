@@ -1,15 +1,16 @@
 
 <script setup>
+
 import { ref, computed, onMounted } from 'vue'
+import bbaocat from '../public/bbaocat.svg'
+import calcCute from '../public/calc-cute.svg'
+import qrcodeCute from '../public/qrcode-cute.svg'
 
 const search = ref('')
 const tools = ref([
-  { name: '和猫猫捡金币', desc: '可爱猫猫陪你计时赚金币', path: '/income-pet-girl' },
-  { name: '图片压缩', desc: '在线图片压缩工具', path: '/img-compress' },
-  { name: 'PDF合并', desc: '多PDF文件合并', path: '/pdf-merge' },
-  { name: 'Markdown预览', desc: '在线Markdown渲染', path: '/md-preview' },
-  { name: '二维码生成', desc: '生成可爱风格二维码', path: '/qrcode' },
-  { name: '表格转JSON', desc: '将表格数据转为JSON', path: '/table2json' },
+  { name: '和猫猫捡金币', desc: '可爱猫猫陪你计时赚金币', path: '/income-pet-girl', img: bbaocat },
+  { name: '计算器', desc: '基础加减乘除，萌萌哒', path: '/calculator', img: calcCute },
+  { name: '二维码生成', desc: '将链接和文本转为可爱二维码', path: '/qrcode', img: qrcodeCute },
 ])
 
 const filteredTools = computed(() =>
@@ -21,11 +22,7 @@ const filteredTools = computed(() =>
 import { useRouter } from 'vue-router'
 const router = useRouter()
 function goTool(path) {
-  if (path === '/income-pet-girl') {
-    router.push(path)
-  } else {
-    window.open(path, '_blank')
-  }
+  router.push(path)
 }
 
 // 移除常见元素默认样式
@@ -70,7 +67,9 @@ onMounted(() => {
         <div class="tool-table">
           <div class="tool-grid">
             <div v-for="tool in filteredTools" :key="tool.name" class="tool-card" @click="goTool(tool.path)">
-              <div class="tool-icon">🍭</div>
+              <div class="tool-icon">
+                <img v-if="tool.img" :src="tool.img" :alt="tool.name" class="tool-img" />
+              </div>
               <div class="tool-info">
                 <div class="tool-name">{{ tool.name }}</div>
                 <div class="tool-desc">{{ tool.desc }}</div>
@@ -209,6 +208,22 @@ onMounted(() => {
   font-size: 2.2em;
   margin-bottom: 0.7em;
   animation: bounce 1.2s infinite alternate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 54px;
+}
+.tool-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px #ffe0f3;
+  background: #fff0f7;
+  transition: transform 0.18s;
+}
+.tool-card:hover .tool-img {
+  transform: scale(1.13) rotate(-6deg);
 }
 .tool-info {
   text-align: center;

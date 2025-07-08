@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import IncomePetGirl from '../views/IncomePetGirl.vue'
 
 const routes = [
-  { path: '/income-pet-girl', component: IncomePetGirl },
+  { path: '/income-pet-girl', component: () => import('../views/IncomePetGirl.vue') },
+  { path: '/calculator', component: () => import('../views/CuteCalculator.vue') },
+  { path: '/qrcode', component: () => import('../views/QrcodeGenerator.vue') },
 ]
 
 const router = createRouter({
