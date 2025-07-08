@@ -4,5 +4,5 @@ import vue from '@vitejs/plugin-vue'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue()],
-  base: '/one_day/', // 仓库名，若不同请改为你的 repo 名
+  base: '/OneDay/', // 仓库名，若不同请改为你的 repo 名
 })
