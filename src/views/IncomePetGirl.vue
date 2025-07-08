@@ -199,7 +199,10 @@ function showResult(isResume = false) {
   totalText.value = `累计收入：${total.value.toFixed(2)} 元`
   document.getElementById('incomeForm').style.display = 'none'
   running.value = true
-  if (timer) clearInterval(timer)
+  if (timer) {
+    clearInterval(timer)
+    timer = null
+  }
   if (!isResume) total.value = 0
   bubbleCooldown = 0
   saveToLocal('running')
@@ -232,6 +235,10 @@ function onSubmit() {
 function onPause() {
   document.getElementById('mainTitle').textContent = '休息会，继续加油！'
   running.value = false
+  if (timer) {
+    clearInterval(timer)
+    timer = null
+  }
   showPause.value = false
   showResume.value = true
   showEnd.value = true
@@ -263,6 +270,25 @@ function onResume() {
   showPause.value = true
   showResume.value = false
   running.value = true
+  if (timer) {
+    clearInterval(timer)
+    timer = null
+  }
+  timer = setInterval(() => {
+    if (!running.value) return
+    const prev = total.value
+    total.value += incomePerSecond
+    animateNumber(document.querySelector('.total'), prev, total.value)
+    petWiggle()
+    if (bubbleCooldown <= 0 && Math.random() < 0.18) {
+      const text = bubbleTexts[Math.floor(Math.random() * bubbleTexts.length)]
+      showBubble(text)
+      bubbleCooldown = 4
+    } else if (bubbleCooldown > 0) {
+      bubbleCooldown--
+    }
+    saveToLocal('running')
+  }, 1000)
   saveToLocal('running')
 }
 
