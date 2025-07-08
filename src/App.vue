@@ -11,6 +11,8 @@ const tools = ref([
   { name: '和猫猫捡金币', desc: '可爱猫猫陪你计时赚金币', path: '/income-pet-girl', img: bbaocat },
   { name: '计算器', desc: '基础加减乘除，萌萌哒', path: '/calculator', img: calcCute },
   { name: '二维码生成', desc: '将链接和文本转为可爱二维码', path: '/qrcode', img: qrcodeCute },
+  { name: '日期计算器', desc: '计算两个日期间的天数', path: '/date-calc', img: qrcodeCute },
+  { name: '时间戳转换', desc: '日期与时间戳互转，支持实时显示', path: '/timestamp-tool', img: calcCute },
 ])
 
 const filteredTools = computed(() =>
