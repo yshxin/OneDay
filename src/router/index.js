@@ -6,6 +6,8 @@ const routes = [
   { path: '/qrcode', component: () => import('../views/QrcodeGenerator.vue') },
   { path: '/date-calc', component: () => import('../views/DateCalculator.vue') },
   { path: '/timestamp-tool', component: () => import('../views/TimestampTool.vue') },
+  { path: '/tetris', component: () => import('../views/TetrisGame.vue') },
+  { path: '/unit-converter', component: () => import('../views/UnitConverter.vue') },
 ]
 
 const router = createRouter({

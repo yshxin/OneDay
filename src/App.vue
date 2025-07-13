@@ -13,6 +13,8 @@ const tools = ref([
   { name: '二维码生成', desc: '将链接和文本转为可爱二维码', path: '/qrcode', img: qrcodeCute },
   { name: '日期计算器', desc: '计算两个日期间的天数', path: '/date-calc', img: qrcodeCute },
   { name: '时间戳转换', desc: '日期与时间戳互转，支持实时显示', path: '/timestamp-tool', img: calcCute },
+  { name: '俄罗斯方块', desc: '可爱风格的经典俄罗斯方块游戏', path: '/tetris', img: bbaocat },
+  { name: '单位换算', desc: '长度、重量、能量、体积、计算机单位可爱换算', path: '/unit-converter', img: bbaocat },
 ])
 
 const filteredTools = computed(() =>
@@ -59,31 +61,29 @@ onMounted(() => {
 </script>
 
 <template>
-  <router-view v-slot="{ Component }">
-    <div class="tool-page">
-      <template v-if="!Component">
-        <h1 class="cute-title">🌸 工具集合</h1>
-        <div class="search-bar">
-          <input v-model="search" placeholder="🔍 搜索工具..." class="cute-input" />
-        </div>
-        <div class="tool-table">
-          <div class="tool-grid">
-            <div v-for="tool in filteredTools" :key="tool.name" class="tool-card" @click="goTool(tool.path)">
-              <div class="tool-icon">
-                <img v-if="tool.img" :src="tool.img" :alt="tool.name" class="tool-img" />
-              </div>
-              <div class="tool-info">
-                <div class="tool-name">{{ tool.name }}</div>
-                <div class="tool-desc">{{ tool.desc }}</div>
-              </div>
+  <div class="tool-page">
+    <template v-if="$route.path === '/'">
+      <h1 class="cute-title">🌸 工具集合</h1>
+      <div class="search-bar">
+        <input v-model="search" placeholder="🔍 搜索工具..." class="cute-input" />
+      </div>
+      <div class="tool-table">
+        <div class="tool-grid">
+          <div v-for="tool in filteredTools" :key="tool.name" class="tool-card" @click="goTool(tool.path)">
+            <div class="tool-icon">
+              <img v-if="tool.img" :src="tool.img" :alt="tool.name" class="tool-img" />
             </div>
-            <div v-if="filteredTools.length === 0" class="empty-tip">没有找到相关工具~</div>
+            <div class="tool-info">
+              <div class="tool-name">{{ tool.name }}</div>
+              <div class="tool-desc">{{ tool.desc }}</div>
+            </div>
           </div>
+          <div v-if="filteredTools.length === 0" class="empty-tip">没有找到相关工具~</div>
         </div>
-      </template>
-      <component :is="Component" v-else />
-    </div>
-  </router-view>
+      </div>
+    </template>
+    <router-view v-else />
+  </div>
 </template>
 
 <style scoped>
